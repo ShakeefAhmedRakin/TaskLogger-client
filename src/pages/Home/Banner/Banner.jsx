@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Banner = () => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <div className="space-y-4 py-0 md:py-16">
@@ -13,12 +17,21 @@ const Banner = () => {
             Attain focus, organization, and peace of mind with TaskLogger
           </p>
           <div className="flex justify-center">
-            <button
-              onClick={() => navigate("/register")}
-              className="btn border-none hover:shadow-xl bg-accent font-heading text-white hover:bg-accent"
-            >
-              Let’s Explore
-            </button>
+            {user ? (
+              <button
+                onClick={() => navigate("/dashboard")}
+                className="btn border-none hover:shadow-xl bg-accent font-heading text-white hover:bg-accent"
+              >
+                Let’s Explore
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate("/register")}
+                className="btn border-none hover:shadow-xl bg-accent font-heading text-white hover:bg-accent"
+              >
+                Let’s Explore
+              </button>
+            )}
           </div>
         </div>
 

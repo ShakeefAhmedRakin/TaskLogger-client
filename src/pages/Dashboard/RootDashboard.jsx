@@ -8,7 +8,7 @@ import { TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
 import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
 
 const Dashboard = () => {
-  const { logOut } = useContext(AuthContext);
+  const { logOut, user } = useContext(AuthContext);
   const closeSidebar = () => {
     const closeBtn = document.getElementById("my-drawer-2");
     if (closeBtn) {
@@ -50,8 +50,14 @@ const Dashboard = () => {
           <ul className="menu h-full p-4 w-80 bg-base-200 text-base-content fixed">
             {/* Sidebar content here */}
             <div className="flex justify-between items-center gap-2">
-              <div className="flex justify-start md:justify-center w-full">
+              <div className="flex flex-col justify-start items-center md:justify-center w-full mb-5">
                 <Logo></Logo>
+                <hr className="my-4" />
+                <img
+                  src={user.photoURL}
+                  className="w-10 aspect-square rounded-full"
+                />
+                <h1 className="font-heading">{user.displayName}</h1>
               </div>
               <label
                 onClick={closeSidebar}
