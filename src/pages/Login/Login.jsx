@@ -22,7 +22,7 @@ const Login = () => {
     signInUser(email, password)
       .then(() => {
         toast.success("Successfully logged in. Redirecting...");
-        setTimeout(() => navigate("/"), 2000);
+        setTimeout(() => navigate("/dashboard"), 2000);
       })
       .catch((error) => {
         toast.error(error.message);

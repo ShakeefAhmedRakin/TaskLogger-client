@@ -32,9 +32,11 @@ const Navbar = () => {
             <img
               src={user.photoURL}
               alt="profile-picture"
-              className="rounded-full w-8"
+              className="rounded-full w-8 aspect-square object-cover"
             />
-            <h1 className="text-xs whitespace-nowrap">{user.displayName}</h1>
+            <h1 className="text-xs whitespace-nowrap font-bold text-accent">
+              {user.displayName}
+            </h1>
           </li>
           <li className="divider divider-vertical flex lg:hidden"></li>
           <li className="navigation-link">

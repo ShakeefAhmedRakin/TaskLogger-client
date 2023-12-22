@@ -14,7 +14,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const Register = () => {
   const [seePassword, setSeePassword] = useState(false);
-  const { createUser, addUsernamePhoto, logOut, signInUser } = useAuth();
+  const { createUser, addUsernamePhoto, logOut } = useAuth();
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
