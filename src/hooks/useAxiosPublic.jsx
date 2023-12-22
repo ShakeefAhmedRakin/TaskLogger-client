@@ -1,6 +1,6 @@
 import axios from "axios";
 export const axiosPublic = axios.create({
-  baseURL: "https://blood-bridge-server.vercel.app",
+  baseURL: "https://task-logger-server.vercel.app",
 });
 
 const useAxiosPublic = () => {

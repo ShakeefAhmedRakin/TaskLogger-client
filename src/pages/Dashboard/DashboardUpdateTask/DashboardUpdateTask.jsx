@@ -6,27 +6,25 @@ import {
   MdPriorityHigh,
   MdTitle,
 } from "react-icons/md";
-import { useContext } from "react";
-import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { toast } from "sonner";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
-const DashboardCreateTask = () => {
-  const { user } = useContext(AuthContext);
-  const email = user.email;
+const DashboardUpdateTask = () => {
   const { register, handleSubmit } = useForm();
-
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  const existingInfo = useLoaderData();
 
   const onSubmit = (data) => {
-    const status = "todo";
-    const task = { email, status, ...data };
+    const task = { ...data };
 
-    axiosPublic.post("/tasks", task).then((res) => {
-      if (res.data.insertedId) {
-        toast.success("Task created successfully");
+    axiosPublic.put(`/tasks/update/${existingInfo._id}`, task).then((res) => {
+      if (res.data.modifiedCount) {
+        toast.success("Task Updated. Redirecting...");
+        setTimeout(() => navigate(-1), 1000);
       } else {
-        toast.error("Error has occurred");
+        toast.error("Nothing changed!");
       }
     });
   };
@@ -47,6 +45,7 @@ const DashboardCreateTask = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5"
                 placeholder="Title"
                 required
+                defaultValue={existingInfo.title}
                 {...register("title", { required: true })}
               ></input>
             </div>
@@ -56,7 +55,7 @@ const DashboardCreateTask = () => {
               </div>
               <select
                 {...register("priority", { required: true })}
-                defaultValue={"default"}
+                defaultValue={existingInfo.priority}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-[11.5px] ps-10"
                 required
               >
@@ -79,6 +78,7 @@ const DashboardCreateTask = () => {
               placeholder="Description"
               rows={5}
               required
+              defaultValue={existingInfo.description}
               {...register("description", { required: true })}
             ></textarea>
           </div>
@@ -95,6 +95,7 @@ const DashboardCreateTask = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5"
                 placeholder="Your Name"
                 required
+                defaultValue={existingInfo.deadline}
                 {...register("deadline", { required: true })}
               ></input>
             </div>
@@ -103,7 +104,7 @@ const DashboardCreateTask = () => {
             className="btn text-white bg-accent hover:bg-accent border-none"
             type="submit"
           >
-            Create New Task <FaTasks className="text-xl"></FaTasks>
+            Update Task <FaTasks className="text-xl"></FaTasks>
           </button>
         </form>
       </div>
@@ -111,4 +112,4 @@ const DashboardCreateTask = () => {
   );
 };
 
-export default DashboardCreateTask;
+export default DashboardUpdateTask;

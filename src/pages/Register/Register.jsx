@@ -161,9 +161,9 @@ const Register = () => {
                 Sign Up
               </button>
               <p className="mb-6 text-center text-sm font-medium">
-                {"Don't have an account?"}{" "}
-                <Link className="link text-accent" to={"/register"}>
-                  Sign up
+                {"Already have an account?"}{" "}
+                <Link className="link text-accent" to={"/login"}>
+                  Log In
                 </Link>
               </p>
             </form>

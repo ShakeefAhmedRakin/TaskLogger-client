@@ -25,6 +25,9 @@ const Navbar = () => {
       <li className="navigation-link">
         <NavLink to="/about">About</NavLink>
       </li>
+      <li className="navigation-link whitespace-nowrap">
+        <NavLink to="/howtouse">How To Use</NavLink>
+      </li>
       <li className="divider divider-vertical lg:divider-horizontal"></li>
       {user ? (
         <>
@@ -43,15 +46,13 @@ const Navbar = () => {
             <NavLink to="/dashboard">Dashboard</NavLink>
           </li>
           <li>
-            <Link to={"/login"}>
-              <button
-                onClick={handleLogOut}
-                className="btn bg-primary border-none hover:shadow-xl hover:bg-primary font-semibold text-white flex-nowrap whitespace-nowrap"
-              >
-                Log Out
-                <GrLogout className="text-xl"></GrLogout>
-              </button>
-            </Link>
+            <button
+              onClick={handleLogOut}
+              className="btn bg-primary border-none hover:shadow-xl hover:bg-primary font-semibold text-white flex-nowrap whitespace-nowrap"
+            >
+              Log Out
+              <GrLogout className="text-xl"></GrLogout>
+            </button>
           </li>
         </>
       ) : (
@@ -81,7 +82,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-end">
-            <ul className="hidden lg:flex font-heading text-text font-semibold text-lg gap-9 items-center">
+            <ul className="hidden lg:flex font-heading text-text font-semibold text-lg gap-6 items-center">
               {links}
             </ul>
             {user ? <></> : <></>}

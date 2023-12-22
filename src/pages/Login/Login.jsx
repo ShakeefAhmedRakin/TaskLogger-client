@@ -6,13 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
-  const { signInUser, signInWithGoogle, signInWithFacebook } = useAuth();
+  const { signInUser, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -35,21 +34,7 @@ const Login = () => {
         console.log(result.user);
         toast.success("Successfully logged in. Redirecting...");
         setTimeout(() => {
-          navigate("/");
-        }, 2000);
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  };
-
-  const handleFacebookSignIn = () => {
-    signInWithFacebook()
-      .then((result) => {
-        console.log(result.user);
-        toast.success("Successfully logged in. Redirecting...");
-        setTimeout(() => {
-          navigate("/");
+          navigate("/dashboard");
         }, 2000);
       })
       .catch((error) => {
@@ -119,13 +104,7 @@ const Login = () => {
             </form>
             {/* FORM ENDS */}
             <div className="divider divider-vertical">OR</div>
-            <button
-              onClick={handleFacebookSignIn}
-              className="w-full btn mb-4 border-none bg-[#0866FF] hover:bg-[#0f55c7] text-white"
-            >
-              <FaFacebook className="text-xl"></FaFacebook>Continue with
-              Facebook
-            </button>
+
             <button
               onClick={handleGoogleSignIn}
               className="w-full btn mb-4 bg-base-100 hover:bg-base-200"
