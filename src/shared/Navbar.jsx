@@ -4,10 +4,11 @@ import Logo from "../components/logo";
 import "./Navbar.css";
 import useAuth from "../hooks/useAuth";
 import { toast } from "sonner";
-import { GrLogin } from "react-icons/gr";
+import { GrLogin, GrLogout } from "react-icons/gr";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -15,7 +16,7 @@ const Navbar = () => {
       })
       .catch((error) => console.log(error));
   };
-
+  console.log(user);
   const links = (
     <>
       <li className="navigation-link">
@@ -27,8 +28,28 @@ const Navbar = () => {
       <li className="divider divider-vertical lg:divider-horizontal"></li>
       {user ? (
         <>
+          <li className="flex flex-col items-center">
+            <img
+              src={user.photoURL}
+              alt="profile-picture"
+              className="rounded-full w-8"
+            />
+            <h1 className="text-xs whitespace-nowrap">{user.displayName}</h1>
+          </li>
+          <li className="divider divider-vertical flex lg:hidden"></li>
           <li className="navigation-link">
             <NavLink to="/dashboard">Dashboard</NavLink>
+          </li>
+          <li>
+            <Link to={"/login"}>
+              <button
+                onClick={handleLogOut}
+                className="btn bg-primary border-none hover:shadow-xl hover:bg-primary font-semibold text-white flex-nowrap whitespace-nowrap"
+              >
+                Log Out
+                <GrLogout className="text-xl"></GrLogout>
+              </button>
+            </Link>
           </li>
         </>
       ) : (
@@ -58,7 +79,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-end">
-            <ul className="hidden lg:flex font-heading text-text font-semibold text-lg gap-12 items-center">
+            <ul className="hidden lg:flex font-heading text-text font-semibold text-lg gap-9 items-center">
               {links}
             </ul>
             {user ? <></> : <></>}

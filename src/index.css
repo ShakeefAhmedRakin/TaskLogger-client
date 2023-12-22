@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-min-height {
+  min-height: 59.5vh; /* This will set the minimum height to 100% of the viewport height */
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e57c23;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
